@@ -1,25 +1,25 @@
 // To parse this JSON data, do
 //
-//     final data = dataFromJson(jsonString);
+//     final shipmentLotViewModel = shipmentLotViewModelFromJson(jsonString);
 
 import 'dart:convert';
 
-Data dataFromJson(String str) => Data.fromJson(json.decode(str));
+ShipmentLotViewModel shipmentLotViewModelFromJson(String str) => ShipmentLotViewModel.fromJson(json.decode(str));
 
-String dataToJson(Data data) => json.encode(data.toJson());
+String shipmentLotViewModelToJson(ShipmentLotViewModel data) => json.encode(data.toJson());
 
-class Data {
-    Data({
+class ShipmentLotViewModel {
+    ShipmentLotViewModel({
         this.status,
         this.data,
     });
 
-    final String ?status;
-    final DataClass? data;
+    String ?status;
+    Data ?data;
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory ShipmentLotViewModel.fromJson(Map<String, dynamic> json) => ShipmentLotViewModel(
         status: json["status"],
-        data: DataClass.fromJson(json["data"]),
+        data: Data.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -28,23 +28,23 @@ class Data {
     };
 }
 
-class DataClass {
-    DataClass({
+class Data {
+    Data({
         this.categories,
         this.products,
     });
 
-    final List<dynamic> ?categories;
-    final Products? products;
+    List<dynamic> ?categories;
+    Products? products;
 
-    factory DataClass.fromJson(Map<String, dynamic> json) => DataClass(
+    factory Data.fromJson(Map<String, dynamic> json) => Data(
         categories: List<dynamic>.from(json["categories"].map((x) => x)),
         products: Products.fromJson(json["products"]),
     );
 
     Map<String, dynamic> toJson() => {
         "categories": List<dynamic>.from(categories!.map((x) => x)),
-        "products": products?.toJson(),
+        "products": products!.toJson(),
     };
 }
 
@@ -56,10 +56,10 @@ class Products {
         this.results,
     });
 
-    final int? count;
-    final String ?next;
-    final String ?previous;
-    final List<Result>? results;
+    int? count;
+    String? next;
+    dynamic? previous;
+    List<Result>? results;
 
     factory Products.fromJson(Map<String, dynamic> json) => Products(
         count: json["count"],
@@ -116,42 +116,42 @@ class Result {
         this.filterValue,
     });
 
-    final int ?id;
-    final Brand ?brand;
-    final String? image;
-    final Charge ?charge;
-    final List<Image>? images;
-    final String ?slug;
-    final String? productName;
-    final String?model;
-    final CommissionType? commissionType;
-    final String ?amount;
-    final String ?tag;
-    final String ?description;
-    final String ?note;
-    final String ?embaddedVideoLink;
-    final int ?maximumOrder;
-    final int ?stock;
-    final bool ?isBackOrder;
-    final Specification ?specification;
-    final String ?warranty;
-    final bool ?preOrder;
-    final int ?productReview;
-    final bool ?isSeller;
-    final bool? isPhone;
-    final bool ?willShowEmi;
-    final dynamic ?badge;
-    final bool? isActive;
-    final DateTime? createdAt;
-    final DateTime ?updatedAt;
-    final dynamic? language;
-    final Seller? seller;
-    final dynamic ?combo;
-    final CreatedBy ?createdBy;
-    final dynamic ?updatedBy;
-    final List<int>? category;
-    final List<dynamic> ?relatedProduct;
-    final List<dynamic> ?filterValue;
+    int? id;
+    Brand ?brand;
+    String? image;
+    Charge? charge;
+    List<Image>? images;
+    String ?slug;
+    String? productName;
+    String? model;
+    CommissionType ?commissionType;
+    String ?amount;
+    String ?tag;
+    String ?description;
+    String? note;
+    String ?embaddedVideoLink;
+    int ?maximumOrder;
+    int? stock;
+    bool? isBackOrder;
+    Specification? specification;
+    String ?warranty;
+    bool? preOrder;
+    int? productReview;
+    bool? isSeller;
+    bool? isPhone;
+    bool? willShowEmi;
+    dynamic? badge;
+    bool? isActive;
+    DateTime? createdAt;
+    DateTime? updatedAt;
+    dynamic? language;
+    Seller? seller;
+    dynamic? combo;
+    CreatedBy? createdBy;
+    dynamic? updatedBy;
+    List<int>? category;
+    List<dynamic>? relatedProduct;
+    List<dynamic>? filterValue;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
@@ -194,9 +194,9 @@ class Result {
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "brand": brand?.toJson(),
+        "brand": brand!.toJson(),
         "image": image,
-        "charge": charge?.toJson(),
+        "charge": charge!.toJson(),
         "images": List<dynamic>.from(images!.map((x) => x.toJson())),
         "slug": slug,
         "product_name": productName,
@@ -240,10 +240,10 @@ class Brand {
         this.slug,
     });
 
-    final Name? name;
-    final String? image;
-    final dynamic ?headerImage;
-    final Slug? slug;
+    Name ?name;
+    String? image;
+    dynamic? headerImage;
+    Slug? slug;
 
     factory Brand.fromJson(Map<String, dynamic> json) => Brand(
         name: nameValues.map[json["name"]],
@@ -290,20 +290,20 @@ class Charge {
         this.message,
     });
 
-    final int? bookingPrice;
-    final int ?currentCharge;
-    final dynamic ?discountCharge;
-    final int ?sellingPrice;
-    final int ?profit;
-    final bool ?isEvent;
-    final dynamic? eventId;
-    final bool? highlight;
-    final dynamic? highlightId;
-    final bool? groupping;
-    final dynamic? grouppingId;
-    final dynamic ?campaignSectionId;
-    final bool ?campaignSection;
-    final dynamic ?message;
+    int? bookingPrice;
+    int? currentCharge;
+    dynamic discountCharge;
+    int? sellingPrice;
+    int? profit;
+    bool ?isEvent;
+    dynamic eventId;
+    bool? highlight;
+    dynamic highlightId;
+    bool? groupping;
+    dynamic grouppingId;
+    dynamic campaignSectionId;
+    bool? campaignSection;
+    dynamic message;
 
     factory Charge.fromJson(Map<String, dynamic> json) => Charge(
         bookingPrice: json["booking_price"],
@@ -360,10 +360,10 @@ class Image {
         this.product,
     });
 
-    final int? id;
-    final String ?image;
-    final bool ?isPrimary;
-    final int? product;
+    int ?id;
+    String? image;
+    bool? isPrimary;
+    int? product;
 
     factory Image.fromJson(Map<String, dynamic> json) => Image(
         id: json["id"],
@@ -380,7 +380,7 @@ class Image {
     };
 }
 
-enum Seller { SUPPLY_LINE }
+enum  Seller { SUPPLY_LINE }
 
 final sellerValues = EnumValues({
     "SupplyLine": Seller.SUPPLY_LINE
@@ -392,16 +392,16 @@ final specificationValues = EnumValues({
     "<|>": Specification.EMPTY
 });
 
-class EnumValues<T> {
-    Map<String, T> map;
-    Map<T, String> ?reverseMap;
+class EnumValues<T>  {
+    late Map<String, T>  map;
+    late Map<T, String> reverseMap;
 
     EnumValues(this.map);
 
-    Map<T, String> get reverse {
+    Map<T, String> get  reverse  {
         if (reverseMap == null) {
             reverseMap = map.map((k, v) => new MapEntry(v, k));
         }
-        return reverseMap!;
+        return reverseMap;
     }
 }
