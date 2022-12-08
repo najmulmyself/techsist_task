@@ -1,15 +1,12 @@
-// To parse this JSON data, do
-//
-//     final shipmentLotViewModel = shipmentLotViewModelFromJson(jsonString);
 
 import 'dart:convert';
 
-ShipmentLotViewModel shipmentLotViewModelFromJson(String str) => ShipmentLotViewModel.fromJson(json.decode(str));
+ProductDataModel productDataModelFromJson(String str) => ProductDataModel.fromJson(json.decode(str));
 
-String shipmentLotViewModelToJson(ShipmentLotViewModel data) => json.encode(data.toJson());
+String productDataModelToJson(ProductDataModel data) => json.encode(data.toJson());
 
-class ShipmentLotViewModel {
-    ShipmentLotViewModel({
+class ProductDataModel {
+    ProductDataModel({
         this.status,
         this.data,
     });
@@ -17,7 +14,7 @@ class ShipmentLotViewModel {
     String ?status;
     Data ?data;
 
-    factory ShipmentLotViewModel.fromJson(Map<String, dynamic> json) => ShipmentLotViewModel(
+    factory ProductDataModel.fromJson(Map<String, dynamic> json) => ProductDataModel(
         status: json["status"],
         data: Data.fromJson(json["data"]),
     );

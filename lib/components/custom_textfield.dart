@@ -9,7 +9,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        hintText: 'কাঙ্ক্ষিত পণ্যটি খুঁজুন',
+        hintText: 'Search for your product',
         hintStyle: TextStyle(color: Colors.grey),
         suffixIcon: Icon(Icons.search, color: Colors.grey),
         filled: true,
