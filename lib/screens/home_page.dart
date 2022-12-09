@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
       body: FutureBuilder<List<Result>>(
           future: ApiService().getProducts(),
           builder: (context, AsyncSnapshot snapshot) {
-            print(snapshot.data);
+            print(snapshot.data[0].productName.toString());
             return snapshot.data != null
                 ? Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 28.0),
@@ -57,7 +57,10 @@ class HomePage extends StatelessWidget {
                                         //   'assets/images/chips.png',
                                         //   height: 100,
                                         // ),
-                                        Image.network(snapshot.data[index].,height: 100,),
+                                        Image.network(
+                                          snapshot.data[index].image,
+                                          height: 100,
+                                        ),
                                         SizedBox(height: 10),
                                         AutoSizeText(
                                           snapshot.data[index].productName
@@ -85,7 +88,11 @@ class HomePage extends StatelessWidget {
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
-                                                  '৳ 20.00',
+                                                  snapshot.data[index].charge
+                                                      .currentCharge
+                                                      .toString(),
+
+                                                  // '৳ 20.00',
                                                   style: TextStyle(
                                                     color: Utils.colorMaroon,
                                                     fontSize: 18,
@@ -97,7 +104,8 @@ class HomePage extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  '৳ 22.00',
+                                                  snapshot.data[index].amount,
+                                                  // '৳ 22.00',
                                                   style: TextStyle(
                                                     decoration: TextDecoration
                                                         .lineThrough,
@@ -125,7 +133,11 @@ class HomePage extends StatelessWidget {
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
-                                                  '৳ 25.00',
+                                                  snapshot.data[index].charge
+                                                      .sellingPrice
+                                                      .toString(),
+
+                                                  // '৳ 25.00',
                                                   style: TextStyle(
                                                       fontSize: 13,
                                                       fontWeight:
@@ -143,7 +155,10 @@ class HomePage extends StatelessWidget {
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
-                                                  '৳ 5.00',
+                                                  snapshot
+                                                      .data[index].charge.profit
+                                                      .toString(),
+                                                  // '৳ 5.00',
                                                   style: TextStyle(
                                                     fontSize: 13,
                                                     fontWeight: FontWeight.bold,
@@ -163,9 +178,7 @@ class HomePage extends StatelessWidget {
                     ),
                   )
                 : Center(
-                    child:
-                        Text("No Data Found \n ${snapshot.error.toString()}"),
-                  );
+                    child: CircularProgressIndicator(color: Utils.colorMaroon));
           }),
     );
   }
