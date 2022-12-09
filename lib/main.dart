@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:techsist_task/components/providerClass.dart';
 import 'package:techsist_task/screens/home_page.dart';
-import 'package:techsist_task/screens/test.dart';
 
 import 'utils/utils.dart';
 
